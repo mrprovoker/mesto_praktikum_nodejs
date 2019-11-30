@@ -6,8 +6,8 @@ const usersRoutes = require('./users');
 const router = express.Router();
 
 router
-  .use('/users', usersRoutes)
   .use('/cards', cardsRoutes)
+  .use('/users', usersRoutes)
   .use('*', (req, res) => res.status(404).send({
     message: 'Запрашиваемый ресурс не найден'
   }));
