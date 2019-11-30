@@ -1,3 +1,5 @@
+/* eslint-disable no-param-reassign, no-shadow */
+
 import Popup from './popup';
 
 class PopupWithForm extends Popup {
@@ -13,12 +15,12 @@ class PopupWithForm extends Popup {
 
     this._inputs.forEach((inputElement) => {
       inputElement.addEventListener('input', () => {
-        this._validateInputElement(inputElement)
-      })
+        this._validateInputElement(inputElement);
+      });
     });
 
     const submitButton = this._element.querySelector('.popup__button');
-    submitButton.addEventListener('click', e => {
+    submitButton.addEventListener('click', (e) => {
       e.preventDefault();
       const newCardInfo = this._getInfo();
       this._submitCallback(newCardInfo);
@@ -27,18 +29,20 @@ class PopupWithForm extends Popup {
   }
 
   _validateInputElement(inputElement) {
-    const errorMessageElement = this._errorMessageElements.find(element => element.dataset.forElement === inputElement.name);
+    const errorMessageElement = this._errorMessageElements
+      .find((element) => element.dataset.forElement === inputElement.name);
     if (!inputElement.validity.valid) {
-      errorMessageElement.classList.remove('visually-hidden')
+      errorMessageElement.classList.remove('visually-hidden');
     } else {
-      errorMessageElement.classList.add('visually-hidden')
+      errorMessageElement.classList.add('visually-hidden');
     }
   }
 
   _clear() {
     this._inputs.forEach((inputElement) => {
       inputElement.value = '';
-      const errorMessageElement = this._errorMessageElements.find(element => element.dataset.forElement === inputElement.name);
+      const errorMessageElement = this._errorMessageElements
+        .find((element) => element.dataset.forElement === inputElement.name);
       errorMessageElement.classList.add('visually-hidden');
     });
   }
@@ -54,8 +58,8 @@ class PopupWithForm extends Popup {
   }
 
   _setInfo(data) {
-    Object.keys(data).forEach(inputName => {
-      const element = this._inputs.find(element => element.name === inputName)
+    Object.keys(data).forEach((inputName) => {
+      const element = this._inputs.find((element) => element.name === inputName);
       if (element) element.value = data[inputName];
     });
   }

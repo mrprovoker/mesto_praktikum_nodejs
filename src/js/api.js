@@ -1,5 +1,5 @@
 class Api {
-  constructor({address, token, groupId}) {
+  constructor({ address, token, groupId }) {
     this.token = token;
     this.groupId = groupId;
     this.address = address;
@@ -15,11 +15,11 @@ class Api {
         authorization: this.token
       }
     })
-      .then(res => res.ok ? res.json() : Promise.reject())
-      .catch(e => alert('Ошибка загрузки карточек!'))
+      .then((res) => (res.ok ? res.json() : Promise.reject()))
+      .catch(() => alert('Ошибка загрузки карточек!'));
   }
 
-  addNewCard({name, link}) {
+  addNewCard({ name, link }) {
     return fetch(`${this.address}/${this.groupId}/cards`, {
       method: 'POST',
       headers: {
@@ -31,8 +31,8 @@ class Api {
         link
       })
     })
-      .then(res => res.ok ? res.json() : Promise.reject())
-      .catch(e => alert('Ошибка!'));
+      .then((res) => (res.ok ? res.json() : Promise.reject()))
+      .catch(() => alert('Ошибка!'));
   }
 
   deleteCard(cardID) {
@@ -42,8 +42,8 @@ class Api {
         authorization: this.token,
       }
     })
-      .then(res => res.ok ? res.json() : Promise.reject())
-      .catch(e => alert('Ошибка!'));
+      .then((res) => (res.ok ? res.json() : Promise.reject()))
+      .catch(() => alert('Ошибка!'));
   }
 
   getUserInfo() {
@@ -52,8 +52,8 @@ class Api {
         authorization: this.token
       }
     })
-      .then(res => res.ok ? res.json() : Promise.reject())
-      .catch(e => alert('Ошибка загрузки и информации пользователя!'))
+      .then((res) => (res.ok ? res.json() : Promise.reject()))
+      .catch(() => alert('Ошибка загрузки и информации пользователя!'));
   }
 
   setUserInfo({ name, about }) {
@@ -68,8 +68,8 @@ class Api {
         about
       })
     })
-      .then(res => res.ok ? res.json() : Promise.reject())
-      .catch(e => alert('Ошибка!'));
+      .then((res) => (res.ok ? res.json() : Promise.reject()))
+      .catch(() => alert('Ошибка!'));
   }
 
   setUserAvatar({ avatar }) {
@@ -83,8 +83,8 @@ class Api {
         avatar
       })
     })
-      .then(res => res.ok ? res.json() : Promise.reject())
-      .catch((e) => alert('Ошибка!'));
+      .then((res) => (res.ok ? res.json() : Promise.reject()))
+      .catch(() => alert('Ошибка!'));
   }
 
   changeLikeCardStatus(cardID, like) {
@@ -95,8 +95,8 @@ class Api {
         'Content-Type': 'application/json'
       }
     })
-      .then(res => res.ok ? res.json() : Promise.reject())
-      .catch(e => alert('Ошибка!'));
+      .then((res) => (res.ok ? res.json() : Promise.reject()))
+      .catch(() => alert('Ошибка!'));
   }
 }
 

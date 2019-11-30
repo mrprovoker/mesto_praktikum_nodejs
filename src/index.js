@@ -1,15 +1,18 @@
+/* eslint-disable no-use-before-define, no-param-reassign */
+
 import './pages/index.css';
 import PopupWithForm from './js/popup-with-form';
 import PicturePopup from './js/picture-popup';
 import UserInfoSection from './js/user-info-section';
 import CardListSection from './js/card-list-section';
 import Api from './js/api';
+
 const rootElement = document.querySelector('.root');
 
 const api = new Api({
   address: NODE_ENV === 'development' ? 'http://praktikum.tk' : 'https://praktikum.tk',
-  groupId: `cohort0`,
-  token: `80a75492-21c5-4330-a02f-308029e94b63`,
+  groupId: 'cohort0',
+  token: '80a75492-21c5-4330-a02f-308029e94b63',
 });
 
 
@@ -22,22 +25,22 @@ api.getAppInfo()
 
     userInfoPopup.setSubmitCallback((info) => {
       api.setUserInfo(info)
-        .then(data => userInfoSection.setData(data))
-        .catch(e => userInfoSection.setData());
+        .then((data) => userInfoSection.setData(data))
+        .catch(() => userInfoSection.setData());
     });
 
     avatarPopup.setSubmitCallback((info) => {
       api.setUserAvatar(info)
-        .then(data => userInfoSection.setData(data))
-        .catch(e => userInfoSection.setData());
+        .then((data) => userInfoSection.setData(data))
+        .catch(() => userInfoSection.setData());
     });
 
     newCardPopup.setSubmitCallback((newCardInfo) => {
       api.addNewCard(newCardInfo)
-        .then(data => {
+        .then((data) => {
           cardsInfo.push(data);
           cardListSection.setData(getCardData(data));
-        })
+        });
     });
 
     const cardListSection = new CardListSection({
@@ -65,34 +68,29 @@ api.getAppInfo()
       ]
     });
 
-    const getCardData = (cardInfo) => {
-      return {
-        data: {...cardInfo, currentUserId: userInfo._id},
-        removeHandlerCallback: (card) => {
-          api.deleteCard(card.id)
-            .then(() => {
-              cardsInfo = cardsInfo.filter(item => {
-                return item._id !== cardInfo._id;
-              });
-              card.remove()
-            })
-        },
-        openHandlerCallback: () => {
-          picturePopup.open(cardInfo.link);
-          return picturePopup
-        },
-        likeHandlerCallback: (card) => {
-          api.changeLikeCardStatus(card.id, !card.isLiked)
-            .then(data => {
-              const index = cardsInfo.findIndex(item => item._id === card.id);
-              cardsInfo.splice(index, 1, data);
-              card.setView({...data, currentUserId: userInfo._id});
-            })
-        }
+    const getCardData = (cardInfo) => ({
+      data: { ...cardInfo, currentUserId: userInfo._id },
+      removeHandlerCallback: (card) => {
+        api.deleteCard(card.id)
+          .then(() => {
+            cardsInfo = cardsInfo.filter((item) => item._id !== cardInfo._id);
+            card.remove();
+          });
+      },
+      openHandlerCallback: () => {
+        picturePopup.open(cardInfo.link);
+        return picturePopup;
+      },
+      likeHandlerCallback: (card) => {
+        api.changeLikeCardStatus(card.id, !card.isLiked)
+          .then((data) => {
+            const index = cardsInfo.findIndex((item) => item._id === card.id);
+            cardsInfo.splice(index, 1, data);
+            card.setView({ ...data, currentUserId: userInfo._id });
+          });
       }
-    };
+    });
 
-    cardListSection.setData(cardsInfo.map(item => getCardData(item)));
+    cardListSection.setData(cardsInfo.map((item) => getCardData(item)));
     userInfoSection.setData(userInfo);
   });
-

@@ -1,11 +1,12 @@
-import Section from './section'
+import Section from './section';
+
 class UserInfoSection extends Section {
   constructor(...props) {
     super(...props);
     this._nameElement = this._element.querySelector('.user-info__name');
     this._aboutElement = this._element.querySelector('.user-info__job');
     this._avatarElement = this._element.querySelector('.user-info__photo');
-    this.data = {}
+    this.data = {};
   }
 
   setData(info = this.data) {
@@ -20,8 +21,8 @@ class UserInfoSection extends Section {
       name: this._nameElement.textContent,
       about: this._aboutElement.textContent,
       avatar: this._avatarElement.style.backgroundImage.slice(5, -2)
-    }
+    };
   }
 }
 
-export default UserInfoSection
+export default UserInfoSection;

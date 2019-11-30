@@ -12,13 +12,13 @@ class Popup {
   open() {
     this._element.classList.add('popup_is-opened');
     this._container.appendChild(this._element);
-    document.addEventListener('keyup', this._handleEscClose)
+    document.addEventListener('keyup', this._handleEscClose);
   }
 
   close() {
     this._element.classList.remove('popup_is-opened');
     this._element.remove();
-    document.removeEventListener('keyup', this._handleEscClose)
+    document.removeEventListener('keyup', this._handleEscClose);
   }
 
   _setEventListeners() {

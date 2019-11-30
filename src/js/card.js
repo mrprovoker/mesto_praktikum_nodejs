@@ -2,13 +2,15 @@ const cardTemplate = document.querySelector('#place-card-template').content.quer
 
 const createCardElement = (data) => {
   const newCardElement = cardTemplate.cloneNode(true);
-  newCardElement.querySelector('.place-card__image').style.backgroundImage = 'url(' + data.link + ')';
+  newCardElement.querySelector('.place-card__image').style.backgroundImage = `url(${data.link})`;
   newCardElement.querySelector('.place-card__name').textContent = data.name;
   return newCardElement;
-}
+};
 
 class Card {
-  constructor({data, removeHandlerCallback, openHandlerCallback, likeHandlerCallback}) {
+  constructor({
+    data, removeHandlerCallback, openHandlerCallback, likeHandlerCallback
+  }) {
     this._removeCallback = removeHandlerCallback || (() => {});
     this._openCallback = openHandlerCallback || (() => {});
     this._likeCallback = likeHandlerCallback || (() => {});
@@ -34,7 +36,7 @@ class Card {
   }
 
   get isLiked() {
-    return Boolean(this.data.likes.find(item => item._id === this.data.currentUserId));
+    return Boolean(this.data.likes.find((item) => item._id === this.data.currentUserId));
   }
 
   setLike() {
@@ -65,10 +67,9 @@ class Card {
     this._buttonElementToLike.addEventListener('click', (e) => {
       e.preventDefault();
       e.stopPropagation();
-      this._likeCallback(this)
-    })
+      this._likeCallback(this);
+    });
   }
-
 }
 
 export default Card;

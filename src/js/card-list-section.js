@@ -1,12 +1,11 @@
 import Section from './section';
-import Card from './card'
-const createCardElements = (info) => {
-  return [].concat(info).reduce((fragment, cardData) => {
-    const card = new Card(cardData);
-    fragment.appendChild(card.node);
-    return fragment;
-  }, document.createDocumentFragment());
-}
+import Card from './card';
+
+const createCardElements = (info) => [].concat(info).reduce((fragment, cardData) => {
+  const card = new Card(cardData);
+  fragment.appendChild(card.node);
+  return fragment;
+}, document.createDocumentFragment());
 
 class CardListSection extends Section {
   constructor(...props) {
@@ -24,4 +23,4 @@ class CardListSection extends Section {
 
 window.CardListSection = CardListSection;
 
-export default CardListSection
+export default CardListSection;

@@ -1,4 +1,4 @@
-import Popup from './popup'
+import Popup from './popup';
 
 class PicturePopup extends Popup {
   open(src) {
@@ -7,4 +7,4 @@ class PicturePopup extends Popup {
   }
 }
 
-export default PicturePopup
+export default PicturePopup;
