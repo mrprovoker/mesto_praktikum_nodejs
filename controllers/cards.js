@@ -11,7 +11,7 @@ class CardsController extends BaseController {
     } catch (err) {
       console.error(err);
 
-      this.sendJson('Internal Error', 500);
+      this.send500Error();
     }
   }
 }

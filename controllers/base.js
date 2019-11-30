@@ -20,6 +20,10 @@ class BaseController {
   sendJson(data, status = 200) {
     return this.res.status(status).json(data);
   }
+
+  send500Error() {
+    return this.res.status(500).json({ message: 'Внутренняя ошибка' });
+  }
 }
 
 module.exports = BaseController;

@@ -8,13 +8,13 @@
     "url": "git://github.com/mrprovoker/mesto_praktikum_nodejs.git"
   },
   "scripts": {
+    "deps": "npm install",
+    "dev": "nodemon app",
     "front:build": "cross-env NODE_ENV=production rimraf public && webpack --mode production",
     "front:dev": "cross-env NODE_ENV=development webpack-dev-server --mode development --open --watch",
     "front:deploy": "cross-env NODE_ENV=production gh-pages -d public",
-    "deps": "npm install",
     "lint": "eslint --ext=.js ./ --ignore-path .gitignore",
-    "start": "node app.js",
-    "dev": "nodemon app"
+    "start": "node app.js"
   },
   "author": "Sergei Grobov",
   "license": "ISC",
